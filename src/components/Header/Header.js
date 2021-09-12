@@ -8,7 +8,7 @@ import style from './Header.module.css';
 
 const Header = () => {
   const isLoggedIn = useSelector(getIsLoggedIn);
-
+  console.log(isLoggedIn, 'is logged in?');
   return (
     <header className={style.PageHeader}>
       {/* <ul className={style.MainNav}>
