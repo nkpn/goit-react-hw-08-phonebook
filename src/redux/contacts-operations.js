@@ -45,11 +45,7 @@ export const register = createAsyncThunk('auth/register', async dataUser => {
   console.log(axios.defaults.headers.common.Authorization);
   return data;
 });
-/*
- * POST @ /users/login
- * body: { email, password }
- * После успешного логина добавляем токен в HTTP-заголовок
- */
+
 export const logIn = createAsyncThunk('auth/login', async credentials => {
   try {
     const { data } = await axios.post('/users/login', credentials);
@@ -62,11 +58,6 @@ export const logIn = createAsyncThunk('auth/login', async credentials => {
   }
 });
 
-/*
- * POST @ /users/logout
- * headers: Authorization: Bearer token
- * После успешного логаута, удаляем токен из HTTP-заголовка
- */
 export const logOut = createAsyncThunk('auth/logout', async () => {
   try {
     await axios.post('/users/logout');
@@ -77,34 +68,54 @@ export const logOut = createAsyncThunk('auth/logout', async () => {
   }
 });
 
-/*
- * GET @ /users/current
- * headers:
- *    Authorization: Bearer token
- *
- * 1. Забираем токен из стейта через getState()
- * 2. Если токена нет, выходим не выполняя никаких операций
- * 3. Если токен есть, добавляет его в HTTP-заголовок и выполянем операцию
- */
+export const fetchContactsFromServer = () => async dispatch => {
+  dispatch(contactsActions.fetchContactsRequest());
+  try {
+    const { data } = await axios('/contacts');
+    dispatch(contactsActions.fetchContactsSuccess(data));
+  } catch (error) {
+    dispatch(contactsActions.fetchContactsError(error.message));
+  }
+};
 
-export const fetchCurrentUser = createAsyncThunk(
-  'auth/refresh',
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
+export const fetchPostContactToServer = contactData => async dispatch => {
+  dispatch(contactsActions.fetchContactsRequest());
+  try {
+    const { data } = await axios.post('/contacts', contactData);
+    dispatch(contactsActions.addContact(data));
+  } catch (error) {
+    dispatch(contactsActions.fetchContactsError(error));
+  }
+};
 
-    if (persistedToken === null) {
-      console.log('Токена нет, уходим из fetchCurrentUser');
-      return thunkAPI.rejectWithValue();
-    }
+export const fetchDeleteContactFromServer = id => async dispatch => {
+  dispatch(contactsActions.fetchContactsRequest());
+  try {
+    const data = await axios.delete(`contacts/${id}`);
+    dispatch(contactsActions.deleteContact(id));
+  } catch (error) {
+    dispatch(contactsActions.fetchContactsError(error));
+  }
+};
 
-    token.set(persistedToken);
-    try {
-      const { data } = await axios.get('/users/current');
-      return data;
-    } catch (error) {
-      // TODO: Добавить обработку ошибки error.message
-      console.log(error.message);
-    }
-  },
-);
+// export const fetchCurrentUser = createAsyncThunk(
+//   'auth/refresh',
+//   async (_, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const persistedToken = state.auth.token;
+
+//     if (persistedToken === null) {
+//       console.log('Токена нет, уходим из fetchCurrentUser');
+//       return thunkAPI.rejectWithValue();
+//     }
+
+//     token.set(persistedToken);
+//     try {
+//       const { data } = await axios.get('/users/current');
+//       return data;
+//     } catch (error) {
+//       // TODO: Добавить обработку ошибки error.message
+//       console.log(error.message);
+//     }
+//   },
+// );

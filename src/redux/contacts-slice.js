@@ -28,6 +28,29 @@ const authSlice = createSlice({
     [register.rejected]: state => {
       state = { ...initialState, error: true };
     },
+    [logIn.pending]: state => {
+      state.error = false;
+    },
+    [logIn.fulfilled]: (state, { payload }) => {
+      state.user = payload.user;
+      state.token = payload.token;
+      state.isLoggedIn = true;
+    },
+    [logIn.rejected]: state => {
+      state = { ...initialState, error: true };
+    },
+    [logOut.pending]: state => {
+      state.error = false;
+    },
+    [logOut.fulfilled]: state => {
+      state.token = null;
+      state.isLoggedIn = false;
+      state.user = { name: null, email: null };
+    },
+    [logOut.rejected]: state => {
+      state.error = true;
+    },
+
     // [register.fulfilled](state, action) {
     //   state.user = action.payload.user;
     //   state.token = action.payload.token;
