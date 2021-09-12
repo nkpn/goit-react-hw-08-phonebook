@@ -66,14 +66,6 @@ export default function Login() {
     dispatch(logIn({ email, password }));
     setEmail('');
     setPassword('');
-    // const {
-    //   target: { email, value },
-    // } = e;
-    // const data = {
-    //   email: email.value,
-    //   password: password.value,
-    // };
-    // dispatch(logIn(data));
   };
 
   return (
