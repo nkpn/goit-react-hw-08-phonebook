@@ -7,7 +7,7 @@ import contactsActions from '../../redux/contacts-actions';
 import { getContacts } from 'redux/contacts-selector';
 import notify from 'helpers/Toast';
 import { ToastContainer } from 'react-toastify';
-import contactsOperations from 'redux/contacts-operations';
+import { addContact } from 'redux/contacts-operations';
 
 function SubmitForm() {
   const [name, setName] = useState('');
@@ -49,7 +49,7 @@ function SubmitForm() {
     }
 
     //! Чекни тут
-    dispatch(contactsOperations.addContact({ name, number }));
+    dispatch(addContact({ name, number }));
     reset();
   };
 

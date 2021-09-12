@@ -7,9 +7,8 @@ import UserMenu from 'Views/UserMenu';
 import style from './Header.module.css';
 
 const Header = () => {
-  // const isLoggedIn = useSelector(getIsLoggedIn);
+  const isLoggedIn = useSelector(getIsLoggedIn);
 
-  const isLoggedIn = false;
   return (
     <header className={style.PageHeader}>
       {/* <ul className={style.MainNav}>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TextField } from '@material-ui/core';
-import contactsOperations from 'redux/contacts-operations';
+import { logIn } from 'redux/contacts-operations';
 import Button from '@material-ui/core/Button';
 
 const styles = {
@@ -63,9 +63,17 @@ export default function Login() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(contactsOperations.logIn({ email, password }));
+    dispatch(logIn({ email, password }));
     setEmail('');
     setPassword('');
+    // const {
+    //   target: { email, value },
+    // } = e;
+    // const data = {
+    //   email: email.value,
+    //   password: password.value,
+    // };
+    // dispatch(logIn(data));
   };
 
   return (

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import contactsOperations from 'redux/contacts-operations';
+import { logOut } from 'redux/contacts-operations';
 import { getUsername } from 'redux/contacts-selector';
 
 const styles = {
@@ -33,7 +33,7 @@ export default function UserMenu() {
       <button
         type="button"
         style={styles.button}
-        onClick={() => dispatch(contactsOperations.logOut)}
+        onClick={() => dispatch(logOut())}
       >
         Выйти
       </button>

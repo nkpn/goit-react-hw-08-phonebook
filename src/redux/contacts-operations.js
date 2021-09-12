@@ -13,20 +13,7 @@ const token = {
   },
 };
 
-const fetchContact = () => async dispatch => {
-  dispatch(contactsActions.fetchContactRequest());
-
-  axios
-    .get('/contacts')
-    .then(response => {
-      return dispatch(contactsActions.fetchContactSuccess(response.data));
-    })
-    .catch(error => {
-      return dispatch(contactsActions.fetchContactError(error));
-    });
-};
-
-const addContact = contact => async dispatch => {
+export const addContact = contact => async dispatch => {
   dispatch(contactsActions.addContactRequest());
   axios
     .post('/contacts/', contact)
@@ -38,7 +25,7 @@ const addContact = contact => async dispatch => {
     });
 };
 
-const deleteContact = id => async dispatch => {
+export const deleteContact = id => async dispatch => {
   dispatch(contactsActions.deleteContactRequest());
 
   axios.delete(`/contacts/${id}`).then(() => {
@@ -51,32 +38,19 @@ const deleteContact = id => async dispatch => {
  * body: { name, email, password }
  * После успешной регистрации добавляем токен в HTTP-заголовок
  */
-const register = createAsyncThunk(
-  'contactsOperations/register',
-  async credentials => {
-    // try {
-    //   const { data } = await axios.post('/users/signup', credentials);
-    //   token.set(data.token);
-    //   console.log(axios.defaults.headers.common.Authorization);
-    //   return data;
-    // } catch (error) {
-    //   //* Сделать обработку ошибки
-    //   console.log(error.message);
-    // }
-    const { data } = await axios.post('/users/signup', credentials);
-    token.set(data.token);
-    //! попробуй token.set(token);
-    console.log(axios.defaults.headers.common.Authorization);
-    return data;
-  },
-);
 
+export const register = createAsyncThunk('auth/register', async dataUser => {
+  const { data } = await axios.post('/users/signup', dataUser);
+  token.set(data.token);
+  console.log(axios.defaults.headers.common.Authorization);
+  return data;
+});
 /*
  * POST @ /users/login
  * body: { email, password }
  * После успешного логина добавляем токен в HTTP-заголовок
  */
-const logIn = createAsyncThunk('auth/login', async credentials => {
+export const logIn = createAsyncThunk('auth/login', async credentials => {
   try {
     const { data } = await axios.post('/users/login', credentials);
     token.set(data.token);
@@ -93,7 +67,7 @@ const logIn = createAsyncThunk('auth/login', async credentials => {
  * headers: Authorization: Bearer token
  * После успешного логаута, удаляем токен из HTTP-заголовка
  */
-const logOut = createAsyncThunk('auth/logout', async () => {
+export const logOut = createAsyncThunk('auth/logout', async () => {
   try {
     await axios.post('/users/logout');
     token.unset();
@@ -113,7 +87,7 @@ const logOut = createAsyncThunk('auth/logout', async () => {
  * 3. Если токен есть, добавляет его в HTTP-заголовок и выполянем операцию
  */
 
-const fetchCurrentUser = createAsyncThunk(
+export const fetchCurrentUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
@@ -134,15 +108,3 @@ const fetchCurrentUser = createAsyncThunk(
     }
   },
 );
-
-const contactsOperations = {
-  fetchContact,
-  addContact,
-  deleteContact,
-  register,
-  logIn,
-  logOut,
-  fetchCurrentUser,
-};
-
-export default contactsOperations;

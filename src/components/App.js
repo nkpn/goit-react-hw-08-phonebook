@@ -8,13 +8,13 @@ import { Route, Switch } from 'react-router';
 import Registration from 'Views/Registration';
 import Login from 'Views/Login';
 import { useDispatch } from 'react-redux';
-import contactsOperations from 'redux/contacts-operations';
+import { fetchCurrentUser } from 'redux/contacts-operations';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(contactsOperations.fetchCurrentUser());
+    dispatch(fetchCurrentUser());
   }, [dispatch]);
 
   return (

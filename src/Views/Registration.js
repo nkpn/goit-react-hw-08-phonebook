@@ -1,7 +1,7 @@
 import { TextField } from '@material-ui/core';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import contactsOperations from 'redux/contacts-operations';
+import { register } from 'redux/contacts-operations';
 import Button from '@material-ui/core/Button';
 
 const styles = {
@@ -66,7 +66,7 @@ export default function Registration() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(contactsOperations.register({ name, email, password }));
+    dispatch(register({ name, email, password }));
     setName('');
     setEmail('');
     setPassword('');
