@@ -1,0 +1,26 @@
+.PageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #2a363b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.MainNavText {
+  color: rgb(7, 161, 136);
+}
+
+.MainNavText:hover {
+  color: #6d6b64;
+  cursor: pointer;
+  transition-property: color;
+  transition-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.Container {
+  max-width: 1200px;
+  padding: 0 0;
+  margin: 0 auto;
+}

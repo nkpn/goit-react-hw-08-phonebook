@@ -1,0 +1,37 @@
+.Button {
+  max-width: 200px;
+  padding: 5px 15px;
+  font-size: 18px;
+  font-weight: 500;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid grey;
+  align-self: center;
+}
+
+.Form {
+  border: 1px solid rgb(235, 230, 164);
+  background-color: rgb(228, 224, 172);
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  max-width: 450px;
+}
+
+.Label {
+  font-size: 16px;
+  font-weight: 700;
+  padding: 10px;
+}
+
+.Input {
+  width: 200px;
+  padding: 5px;
+  margin-left: 5px;
+  font-size: 16px;
+  font-style: italic;
+  background-color: rgb(247, 248, 236);
+  border: 1px solid rgb(209, 206, 206);
+}
