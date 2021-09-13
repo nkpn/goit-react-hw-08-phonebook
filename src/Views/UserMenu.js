@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from 'redux/contacts-operations';
-import { getUsername } from 'redux/contacts-selector';
+import { logOut } from 'redux/AuthRedux/authOperations';
+import { getUsername } from 'redux/AuthRedux/authSelector';
 
 const styles = {
   container: {
@@ -35,7 +35,7 @@ export default function UserMenu() {
         style={styles.button}
         onClick={() => dispatch(logOut())}
       >
-        Выйти
+        Log out
       </button>
     </div>
   );

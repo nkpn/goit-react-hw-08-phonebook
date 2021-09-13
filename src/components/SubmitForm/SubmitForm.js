@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import s from './SubmitForm.module.css';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import shortid from 'shortid';
-import PropTypes from 'prop-types';
-import contactsActions from '../../redux/contacts-actions';
 import { getContacts } from 'redux/contacts-selector';
 import notify from 'helpers/Toast';
-import { ToastContainer } from 'react-toastify';
 import { addContact } from 'redux/contacts-operations';
 
 function SubmitForm() {

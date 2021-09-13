@@ -1,8 +1,8 @@
-import { TextField } from '@material-ui/core';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { register } from 'redux/contacts-operations';
-import Button from '@material-ui/core/Button';
+import { register } from 'redux/AuthRedux/authOperations';
+// import Button from '@material-ui/core/Button';
+// import { TextField } from '@material-ui/core';
 
 const styles = {
   form: {

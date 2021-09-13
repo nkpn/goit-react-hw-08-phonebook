@@ -7,15 +7,20 @@ import HomeView from 'Views/HomeView';
 import { Route, Switch } from 'react-router';
 import Registration from 'Views/Registration';
 import Login from 'Views/Login';
-import { useDispatch } from 'react-redux';
-import { fetchContactsFromServer } from 'redux/contacts-operations';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCurrentUser } from 'redux/AuthRedux/authOperations';
+import { getToken } from 'redux/AuthRedux/authSelector';
 
 function App() {
   const dispatch = useDispatch();
+  const token = useSelector(getToken);
 
   useEffect(() => {
-    dispatch(fetchContactsFromServer());
-  }, [dispatch]);
+    if (token === null) {
+      return;
+    }
+    dispatch(fetchCurrentUser());
+  }, [dispatch, token]);
 
   return (
     <>

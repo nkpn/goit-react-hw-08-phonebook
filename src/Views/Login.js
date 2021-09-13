@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { TextField } from '@material-ui/core';
-import { logIn } from 'redux/contacts-operations';
-import Button from '@material-ui/core/Button';
+import { logIn } from 'redux/AuthRedux/authOperations';
+// import Button from '@material-ui/core/Button';
+// import { TextField } from '@material-ui/core';
 
 const styles = {
   form: {
@@ -66,6 +66,14 @@ export default function Login() {
     dispatch(logIn({ email, password }));
     setEmail('');
     setPassword('');
+    // const {
+    //   target: { email, value },
+    // } = e;
+    // const data = {
+    //   email: email.value,
+    //   password: password.value,
+    // };
+    // dispatch(logIn(data));
   };
 
   return (

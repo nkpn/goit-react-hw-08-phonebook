@@ -10,7 +10,9 @@ import {
 const ContactList = () => {
   const contacts = useSelector(getVisibleContacts);
   const dispatch = useDispatch();
-  const deleteContact = id => dispatch(deleteContact(id));
+  const onDeleteContact = id => {
+    dispatch(deleteContact(id));
+  };
 
   useEffect(() => {
     dispatch(fetchContactsFromServer());
@@ -23,12 +25,7 @@ const ContactList = () => {
           return (
             <li key={contact.id} className={style.Contact__item}>
               {contact.name} : {contact.number}
-              <button
-                type="button"
-                onClick={() => {
-                  deleteContact(contact.id);
-                }}
-              >
+              <button type="button" onClick={() => onDeleteContact(contact.id)}>
                 Delete
               </button>
             </li>

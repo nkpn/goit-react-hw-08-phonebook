@@ -5,26 +5,26 @@ import actions from './contacts-actions';
 
 //* CreateReducer
 const items = createReducer([], {
-  [contactsActions.fetchContactSuccess]: (_, action) => action.payload,
-
-  [contactsActions.addContactSuccess]: (state, action) => [
+  [contactsActions.fetchContactsSuccess]: (_, { payload }) => payload,
+  [contactsActions.addContactSuccess]: (state, { payload }) => [
     ...state,
-    action.payload,
+    payload,
   ],
-
-  [contactsActions.deleteContactSuccess]: (state, action) =>
-    state.filter(state => state.id !== action.payload),
+  [contactsActions.deleteContactSuccess]: (state, { payload }) =>
+    state.filter(s => s.id !== payload),
 });
 
 const isLoading = createReducer(false, {
-  [contactsActions.fetchContactRequest]: () => true,
-  [contactsActions.fetchContactSuccess]: () => false,
-  [contactsActions.fetchContactError]: () => false,
+  [contactsActions.fetchContactsRequest]: () => true,
+  [contactsActions.fetchContactsSuccess]: () => false,
+  [contactsActions.fetchContactsError]: () => false,
+  [contactsActions.addContactRequest]: () => false,
+  [contactsActions.deleteContactRequest]: () => false,
 });
 
 const error = createReducer(null, {
-  [contactsActions.fetchContactError]: (_, action) => action.payload,
-  [contactsActions.fetchContactRequest]: (_, action) => null,
+  [contactsActions.fetchContactsError]: (_, action) => action.payload,
+  [contactsActions.fetchContactsRequest]: (_, action) => null,
 });
 
 const filter = createReducer('', {
