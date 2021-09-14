@@ -37,7 +37,7 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "netlify deploy -p",
     "api-server": "json-server --port 3030 --delay 300 --watch db.json"
   },
   "eslintConfig": {
